@@ -1,0 +1,16 @@
+/* header.module.css */
+.navbar-custom {
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background-color: #f8f9fa;
+    }
+}
+
+@media (min-width: 545px) {
+    .nav-btn {
+        display: none;
+    }
+}

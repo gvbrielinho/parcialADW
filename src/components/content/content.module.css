@@ -1,0 +1,25 @@
+.content {
+    margin-left: 80px;
+    /* This should match the width of your sidebar */
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.content.sidebar-open {
+    margin-left: 280px;
+}
+
+@media (max-width: 545px) {
+    .content {
+        margin-left: 0;
+
+    }
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}

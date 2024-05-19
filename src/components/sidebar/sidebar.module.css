@@ -1,0 +1,151 @@
+/* sidebar.module.css */
+
+@media (max-width: 545px) {
+    .sidebar-collapsed {
+        display: none;
+    }
+}
+
+.sidebar-open {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    transition: width 0.3s ease-in-out;
+    z-index: 1000;
+    padding-top: 60px !important;
+    justify-content: center;
+    padding: 5px;
+}
+
+.sidebar-collapsed {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    background-color: #f8f9fa;
+    transition: width 0.3s ease-in-out;
+    /* Adjusted transition property */
+    width: 80px;
+    height: 100vh;
+    z-index: 1000;
+    position: fixed;
+    padding-right: 5px;
+    justify-content: end;
+}
+
+@media (max-width: 545px) {
+    .sidebar-collapsed {
+        display: none;
+
+    }
+}
+
+.sidebar-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.toggle-btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+
+}
+
+.toggle-btn {
+    display: flex;
+    justify-content: center;
+    font-size: 22px;
+    width: 100% !important;
+    cursor: pointer;
+}
+
+.burger-icon-collapsed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    padding: 8px;
+}
+
+.burger-icon-collapsed:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn-opened {
+    display: flex;
+    flex-direction: row;
+    font-size: 22px;
+    width: 100% !important;
+    padding: 10px;
+}
+
+.burger-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    padding: 8px;
+}
+
+.burger-container:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.menu-title-container {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    width: 100% !important;
+    padding: 10px;
+}
+
+.item-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 8px;
+
+}
+
+.item-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    padding-left: 20px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+
+.menu-item {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    padding: 10px;
+}
