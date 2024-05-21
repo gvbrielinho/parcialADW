@@ -1,8 +1,9 @@
 .content {
     margin-left: 80px;
-    /* This should match the width of your sidebar */
     padding: 20px;
     transition: margin-left 0.3s ease-in-out;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .content.sidebar-open {
@@ -16,10 +17,147 @@
     }
 }
 
-.page {
-    display: none;
+@media (max-width: 748px) {
+    .ram-container {
+        padding: 0 !important;
+    }
+
+    .final-block {
+        padding-top: 10px !important;
+    }
 }
 
-.page.active {
-    display: block;
+.color {
+    color: rgb(49, 147, 138);
+}
+
+.back-color {
+    background: rgb(49, 147, 138);
+}
+
+.color-white {
+    color: #fff;
+
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+}
+
+.img-container img {
+    max-width: 50%;
+    border-radius: 50%;
+}
+
+.date-row {
+    background-color: rgb(49, 147, 138);
+    align-items: center;
+    padding: 30px 0;
+    height: 35px;
+}
+
+.date-title {
+    display: flex;
+    justify-content: flex-start;
+    color: #fff;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.head-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0;
+    padding: 30px 0;
+    border-bottom: 3px solid rgb(49, 147, 138);
+    ;
+}
+
+.head-container h1 {
+    font-size: 30px;
+    color: rgb(49, 147, 138);
+}
+
+.main-container {
+    padding: 20px 0;
+    border-bottom: 3px solid rgb(49, 147, 138);
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    background-color: rgb(49, 147, 138);
+    align-items: center;
+    padding: 20px 0;
+    height: 35px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.news-block {
+    text-align: justify;
+    margin: 5px 0;
+}
+
+.pika-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pika {
+    width: 200px;
+}
+
+.p-text {
+    text-align: justify;
+}
+
+.bottom-article {
+    margin: 0;
+    padding: 15px 0;
+    text-align: justify;
+}
+
+.bottom-img {
+    height: 150px;
+    width: 100%;
+    padding: 0;
+}
+
+.icon-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    height: 100%;
+    background-color: rgb(49, 147, 138);
+
+}
+
+.ram-icon {
+    font-size: 10vw;
+    padding: 5px;
+    display: flex;
+}
+
+.final-block {
+    padding-top: 20px;
+    width: 100%;
 }
