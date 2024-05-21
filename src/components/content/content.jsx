@@ -65,7 +65,7 @@ const ContentComponent = ({ isSidebarOpen }) => {
                                 a cargo de la UFI Descentralizada de Vicente López Oeste, es una buena noticia entre tanto drama: dieron de alta al nene de 12 años que viajaba en el <i>Toyota Corolla</i> que fue aplastado por el container del camión que se desprendió por la violencia del siniestro.</p>
                         </div>
                     </div>
-                    <div className='row p-0'>
+                    <div className='row p-2'>
                         <div className='col-md-10 col-xs-12'>
                             <div className='row'>
                                 <p className={styles['bottom-article']}>

@@ -151,6 +151,10 @@
 
 }
 
+.ram-container {
+    padding-right: 0;
+}
+
 .ram-icon {
     font-size: 10vw;
     padding: 5px;
