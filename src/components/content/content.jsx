@@ -31,6 +31,9 @@ const ContentComponent = ({ isSidebarOpen }) => {
                         <div className='row'>
                             <div className={`${styles['head-container']}`}>
                                 <h1>Encabezado</h1>
+                            </div>
+                            <div className={`${styles['head-container-form']}`}>
+                                <h2 className={styles.color}>Formulario Suscriptor</h2>
                                 <div className='m-2'>
                                     <Button variant="primary" onClick={handleShow}>
                                         Mostrar Formulario

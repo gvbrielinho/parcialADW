@@ -1,18 +1,35 @@
+/* modal.module.css */
 .modal-custom {
-    max-width: 50vw;
+    max-width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
 }
 
 .fields {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    max-width: inherit;
+    width: 100%;
+    padding: 10px;
 }
+
+
 
 .label-custom {
     font-size: 11px;
-    margin: 5px;
+    margin: 5px 0;
     font-weight: 700;
+}
+
+.error-text {
+    color: rgba(255, 41, 84, 0.8);
+    font-size: 10px;
+    padding-top: 2px;
+}
+
+.submitContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
 }

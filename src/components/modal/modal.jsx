@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './modal.module.css';
@@ -8,6 +8,7 @@ const ModalDynamic = ({ show, active }) => {
         fullName: '',
         email: '',
         password: '',
+        repeatPassword: '',
         age: '',
         phone: '',
         address: '',
@@ -18,7 +19,26 @@ const ModalDynamic = ({ show, active }) => {
 
     const [errors, setErrors] = useState({});
     const [title, setTitle] = useState('HOLA');
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+    useEffect(() => {
+        if (!active) {
+            setFormData({
+                fullName: '',
+                email: '',
+                password: '',
+                repeatPassword: '',
+                age: '',
+                phone: '',
+                address: '',
+                city: '',
+                postalCode: '',
+                dni: ''
+            })
+            setErrors({});
+        }
+    }, [active])
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -47,6 +67,11 @@ const ModalDynamic = ({ show, active }) => {
             case 'password':
                 if (value.length < 8 || !/[a-zA-Z]/.test(value) || !/\d/.test(value)) {
                     error = 'Contraseña debe tener al menos 8 caracteres, con letras y números.';
+                }
+                break;
+            case 'repeatPassword':
+                if (value !== formData.password) {
+                    error = 'Las contraseñas no coinciden.';
                 }
                 break;
             case 'age':
@@ -114,142 +139,190 @@ const ModalDynamic = ({ show, active }) => {
         });
 
         if (Object.keys(newErrors).length === 0) {
-            alert(JSON.stringify(formData, null, 2));
+            setShowSuccessModal(true);
         } else {
-            alert(JSON.stringify(newErrors, null, 2));
+            setShowErrorModal(true);
         }
     };
 
     return (
         <React.Fragment>
-            <Modal show={active} onHide={() => show(!active)} centered>
-                <Modal.Header>
+            <Modal show={active} onHide={() => {
+                show(!active);
+            }} centered size='lg'>
+                <Modal.Header closeButton>
+                    <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className={styles['modal-custom']} onSubmit={handleSubmit}>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Nombre Completo:</label>
-                            <input
-                                type="text"
-                                name="fullName"
-                                className='form-control'
-                                value={formData.fullName}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.fullName && <span>{errors.fullName}</span>}
+                    <form className={`${styles['modal-custom']}`} onSubmit={handleSubmit}>
+                        <div className='col-12 col-lg-6'>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Nombre Completo:</label>
+                                <input
+                                    type="text"
+                                    name="fullName"
+                                    className='form-control'
+                                    value={formData.fullName}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.fullName && <span className={styles['error-text']}>{errors.fullName}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Email:</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    className='form-control'
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.email && <span className={styles['error-text']}>{errors.email}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Contraseña:</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    className='form-control'
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.password && <span className={styles['error-text']}>{errors.password}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Repetir Contraseña:</label>
+                                <input
+                                    type="password"
+                                    name="repeatPassword"
+                                    className='form-control'
+                                    value={formData.repeatPassword}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.repeatPassword && <span className={styles['error-text']}>{errors.repeatPassword}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Edad:</label>
+                                <input
+                                    type="number"
+                                    name="age"
+                                    className='form-control'
+                                    value={formData.age}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.age && <span className={styles['error-text']}>{errors.age}</span>}
+                            </div>
                         </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Email:</label>
-                            <input
-                                type="email"
-                                name="email"
-                                className='form-control'
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.email && <span>{errors.email}</span>}
+                        <div className='col-12 col-lg-6'>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Teléfono:</label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    className='form-control'
+                                    value={formData.phone}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.phone && <span className={styles['error-text']}>{errors.phone}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Dirección:</label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    className='form-control'
+                                    value={formData.address}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.address && <span className={styles['error-text']}>{errors.address}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Ciudad:</label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    className='form-control'
+                                    value={formData.city}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.city && <span className={styles['error-text']}>{errors.city}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>Código Postal:</label>
+                                <input
+                                    type="text"
+                                    name="postalCode"
+                                    className='form-control'
+                                    value={formData.postalCode}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.postalCode && <span className={styles['error-text']}>{errors.postalCode}</span>}
+                            </div>
+                            <div className={`container-fluid ${styles.fields}`}>
+                                <label className={styles['label-custom']}>DNI:</label>
+                                <input
+                                    type="text"
+                                    name="dni"
+                                    className='form-control'
+                                    value={formData.dni}
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    onFocus={handleFocus}
+                                />
+                                {errors.dni && <span className={styles['error-text']}>{errors.dni}</span>}
+                            </div>
                         </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Contraseña:</label>
-                            <input
-                                type="password"
-                                name="password"
-                                className='form-control'
-                                value={formData.password}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.password && <span>{errors.password}</span>}
+                        <div className={styles.submitContainer}>
+                            <Button type="submit" variant="primary">Enviar</Button>
                         </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Edad:</label>
-                            <input
-                                type="number"
-                                name="age"
-                                className='form-control'
-                                value={formData.age}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.age && <span>{errors.age}</span>}
-                        </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Teléfono:</label>
-                            <input
-                                type="tel"
-                                name="phone"
-                                className='form-control'
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.phone && <span>{errors.phone}</span>}
-                        </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Dirección:</label>
-                            <input
-                                type="text"
-                                name="address"
-                                className='form-control'
-                                value={formData.address}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.address && <span>{errors.address}</span>}
-                        </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Ciudad:</label>
-                            <input
-                                type="text"
-                                name="city"
-                                className='form-control'
-                                value={formData.city}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.city && <span>{errors.city}</span>}
-                        </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>Código Postal:</label>
-                            <input
-                                type="text"
-                                name="postalCode"
-                                className='form-control'
-                                value={formData.postalCode}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.postalCode && <span>{errors.postalCode}</span>}
-                        </div>
-                        <div className={styles.fields}>
-                            <label className={styles['label-custom']}>DNI:</label>
-                            <input
-                                type="text"
-                                name="dni"
-                                className='form-control'
-                                value={formData.dni}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                                onFocus={handleFocus}
-                            />
-                            {errors.dni && <span>{errors.dni}</span>}
-                        </div>
-                        <Button type="submit">Enviar</Button>
                     </form>
                 </Modal.Body>
+            </Modal>
+
+            <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Errores de Validación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ul>
+                        {Object.entries(errors).map(([field, error]) => (
+                            error && <li key={field}>{error}</li>
+                        ))}
+                    </ul>
+                </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => show(!active)}>
-                        Close
+                    <Button variant="secondary" onClick={() => setShowErrorModal(false)}>
+                        Cerrar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Formulario Completado</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    El formulario fue completado y enviado exitosamente.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowSuccessModal(false)}>
+                        Cerrar
                     </Button>
                 </Modal.Footer>
             </Modal>
